@@ -41,7 +41,7 @@ class Layout extends Component {
     if (nextProps.auth.user) {
       const favicon = this.getFaviconEl(); // Accessing favicon element
       favicon.href = nextProps.auth.user.fav_icon;
-      document.title = `Prowara - ${this.props.page}`;
+      document.title = `KolaBiz - ${this.props.page}`;
       this.getProps(nextProps);
     }
   };
