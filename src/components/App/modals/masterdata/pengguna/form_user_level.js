@@ -144,7 +144,7 @@ class FormUserLevel extends Component {
                       checked={val.isChecked}
                     />
                   </div>
-                  <hr style={{ borderColor: "white" }} />
+                  <hr style={{ borderColor: "gray", borderStyle: "dashed" }} />
                 </div>
               ) : (
                 <div style={{ zoom: "80%" }} className="col-md-12" key={key}>
@@ -213,7 +213,8 @@ class FormUserLevel extends Component {
                   </div>
                   <hr
                     style={{
-                      borderColor: menu.length - 1 === key ? "" : "white",
+                      borderColor: menu.length - 1 === key ? "" : "gray",
+                      borderStyle: "dashed",
                     }}
                   />
                 </div>

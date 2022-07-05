@@ -21,7 +21,7 @@ export const NOTIF_ALERT = {
 
 export const HEADERS = {
   // URL: "http://localhost:6706/",
-  URL: "https://api.prowara.id/",
+  URL: "https://api.kolabiz.id/",
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2RiN2M5OC0wNWNmLTQ4NDgtOGM3Yy0yZTFiYTczZGUwNmYiLCJpYXQiOjE1NzAxNzM0ODYsImV4cCI6MTU3MDc3ODI4Nn0.1NiWtt2luG83am8FJSvWpL5p35Oxd8GSJJTwhFmAdgw",
   REQ: "backoffice",
@@ -53,6 +53,14 @@ export const AUTH = {
 export const DASHBOARD = {
   LOADING: "SET_DASHBOARD_LOADING",
   SUCCESS: "SET_DASHBOARD_SUCCESS",
+};
+
+export const STOCKIS = {
+  GET: "GET",
+  LOADING_GET: "LOADING_GET",
+  GET_DETAIL: "GET_DETAIL",
+  LOADING_DETAIL: "LOADING_DETAIL",
+  LOADING_POST: "LOADING_POST",
 };
 
 /****************

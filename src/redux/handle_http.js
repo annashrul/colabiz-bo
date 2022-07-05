@@ -22,15 +22,12 @@ export const loading = (isStatus = true, title = "Silahkan tunggu.") => {
 };
 
 export const handleError = (err) => {
-  if (err.message === "Network Error") {
-    swal(strNetworkError);
-  } else {
-    if (err.response !== undefined) {
-      if (err.response.data.msg !== undefined) {
-        swal(err.response.data.msg);
-      } else {
-        swal(strServerError);
-      }
+  console.log(err.response.data.meta);
+  if (err.response !== undefined) {
+    if (err.response.data.meta.message !== undefined) {
+      swal(err.response.data.meta.message);
+    } else {
+      swal(strServerError);
     }
   }
 };
@@ -85,7 +82,7 @@ export const handlePut = async (url, data, callback) => {
           swal(NOTIF_ALERT.SUCCESS);
           callback(datum, datum.msg, true);
         } else {
-          swal(NOTIF_ALERT.FAILED);
+          swal("NOTIF_ALERT.FAILED");
           callback(datum, datum.msg, false);
         }
       }, 800);

@@ -1,4 +1,5 @@
 import IndexMember from "./components/App/masterdata/member/index";
+import IndexStokis from "./components/App/masterdata/stokis/index";
 import IndexUser from "./components/App/masterdata/pengguna/index";
 import IndexUserLevel from "./components/App/masterdata/pengguna/level";
 import IndexPaket from "./components/App/masterdata/paket/index";
@@ -19,6 +20,7 @@ import IndexPengaturanUmum from "./components/App/setting/umum";
 export const LinkMenu = {
   dashboard: "/",
   indexMember: "/masterdata/member",
+  indexStokis: "/masterdata/stokis",
   indexUser: "/masterdata/pengguna",
   indexUserLevel: "/masterdata/pengguna/akses",
   indexPaket: "/masterdata/paket",
@@ -39,6 +41,7 @@ export const LinkMenu = {
 
 export const menuItem = [
   { link: LinkMenu.indexMember, component: IndexMember },
+  { link: LinkMenu.indexStokis, component: IndexStokis },
   { link: LinkMenu.indexUser, component: IndexUser },
   { link: LinkMenu.indexUserLevel, component: IndexUserLevel },
   { link: LinkMenu.indexPaket, component: IndexPaket },
@@ -67,6 +70,15 @@ export const menu = () => {
       isToggle: false,
       sub: undefined,
       icons: "fa fa-user-o",
+    },
+    {
+      id: 2000,
+      label: "stokis",
+      path: LinkMenu.indexStokis,
+      isChecked: false,
+      isToggle: false,
+      sub: undefined,
+      icons: "fa fa-diamond",
     },
     {
       id: 1000,
@@ -103,62 +115,30 @@ export const menu = () => {
       ],
     },
 
-    {
-      id: 500,
-      label: "paket",
-      path: "",
-      isChecked: false,
-      isToggle: false,
-      icons: "fa fa-diamond",
-      sub: [
-        {
-          id: 501,
-          label: "list",
-          path: LinkMenu.indexPaket,
-          parent: "paket",
-          isChecked: false,
-        },
-        {
-          id: 502,
-          label: "kategori",
-          path: LinkMenu.indexKategoriPaket,
-          parent: "paket",
-          isChecked: false,
-        },
-        {
-          id: 503,
-          label: "tipe",
-          path: LinkMenu.indexTipePaket,
-          parent: "paket",
-          isChecked: false,
-        },
-      ],
-    },
-
-    {
-      id: 10,
-      label: "e-wallet",
-      path: "",
-      isChecked: false,
-      isToggle: false,
-      icons: "fa fa-credit-card",
-      sub: [
-        {
-          id: 11,
-          label: "deposit",
-          path: LinkMenu.indexDeposit,
-          parent: "e-wallet",
-          isChecked: false,
-        },
-        {
-          id: 12,
-          label: "penarikan",
-          path: LinkMenu.indexPenarikan,
-          parent: "e-wallet",
-          isChecked: false,
-        },
-      ],
-    },
+    // {
+    //   id: 10,
+    //   label: "e-wallet",
+    //   path: "",
+    //   isChecked: false,
+    //   isToggle: false,
+    //   icons: "fa fa-credit-card",
+    //   sub: [
+    //     {
+    //       id: 11,
+    //       label: "deposit",
+    //       path: LinkMenu.indexDeposit,
+    //       parent: "e-wallet",
+    //       isChecked: false,
+    //     },
+    //     {
+    //       id: 12,
+    //       label: "penarikan",
+    //       path: LinkMenu.indexPenarikan,
+    //       parent: "e-wallet",
+    //       isChecked: false,
+    //     },
+    //   ],
+    // },
 
     {
       id: 350,
@@ -200,13 +180,6 @@ export const menu = () => {
           parent: "laporan",
           isChecked: false,
         },
-        {
-          id: 401,
-          label: "penjualan",
-          path: LinkMenu.indexLaporanPenjualan,
-          parent: "laporan",
-          isChecked: false,
-        },
       ],
       otherSub: true,
     },
@@ -218,13 +191,13 @@ export const menu = () => {
       isToggle: false,
       icons: "fa fa-cogs",
       sub: [
-        {
-          id: 16,
-          label: "umum",
-          path: LinkMenu.indexPengaturanUmum,
-          parent: "pengaturan",
-          isChecked: false,
-        },
+        // {
+        //   id: 16,
+        //   label: "umum",
+        //   path: LinkMenu.indexPengaturanUmum,
+        //   parent: "pengaturan",
+        //   isChecked: false,
+        // },
         {
           id: 17,
           label: "bank",
@@ -232,20 +205,6 @@ export const menu = () => {
           parent: "pengaturan",
           isChecked: false,
         },
-        // {
-        //   id: 18,
-        //   label: "kurir",
-        //   path: LinkMenu.indexPengaturanKurir,
-        //   parent: "pengaturan",
-        //   isChecked: false,
-        // },
-        // {
-        //   id: 19,
-        //   label: "landing",
-        //   path: LinkMenu.indexPengaturanLanding,
-        //   parent: "pengaturan",
-        //   isChecked: false,
-        // },
       ],
       otherSub: true,
     },

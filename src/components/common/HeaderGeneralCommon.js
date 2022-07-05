@@ -213,7 +213,7 @@ class HeaderGeneralCommon extends Component {
                       e.preventDefault();
                       this.props.callbackAdd();
                     }}
-                    className={`btn btn-primary`}
+                    className={`btn btn-primary ml-2`}
                   >
                     {this.props.callbackAddText === "" ||
                     this.props.callbackAddText === null ||
@@ -230,8 +230,7 @@ class HeaderGeneralCommon extends Component {
                       e.preventDefault();
                       this.props.callbackExport();
                     }}
-                    className="btn btn-primary"
-                    style={{ marginLeft: "2px" }}
+                    className="btn btn-primary ml-2"
                   >
                     <i className="fa fa-print" />
                   </button>

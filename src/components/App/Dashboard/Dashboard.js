@@ -24,7 +24,7 @@ class Dashboard extends Component {
   };
 
   componentWillMount() {
-    this.props.dispatch(getDashboard());
+    // this.props.dispatch(getDashboard());
   }
 
   render() {

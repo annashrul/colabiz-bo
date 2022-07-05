@@ -201,9 +201,14 @@ export const baseImage = (res) => {
   );
 };
 
-export const swallOption = (msg, callback, isCancel) => {
+export const swallOption = (
+  msg,
+  callback,
+  isCancel,
+  title = "Informasi !!!"
+) => {
   Swal.fire({
-    title: "Informasi !!!",
+    title: title,
     html: `${msg}`,
     icon: "warning",
     allowOutsideClick: false,
@@ -245,9 +250,9 @@ export const statusOrder = (type, status, iswhite = false) => {
   }
 };
 
-export const swalWithCallback = (msg, callback) => {
+export const swalWithCallback = (msg, callback, title = "Informasi !!!") => {
   Swal.fire({
-    title: "Informasi !!!",
+    title: title,
     html: `${msg}`,
     icon: "warning",
     allowOutsideClick: false,
