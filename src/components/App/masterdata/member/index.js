@@ -151,7 +151,8 @@ class IndexMember extends Component {
               ? data.length > 0
                 ? data.map((v, i) => {
                     totalSaldoPendingPerPage =
-                      totalSaldoPendingPerPage + parseFloat(v.saldo_pending);
+                      totalSaldoPendingPerPage +
+                      parseFloat(v.saldo === null ? "0" : v.saldo);
                     return (
                       <tr key={i}>
                         <td className="middle nowrap text-center">

@@ -45,46 +45,6 @@ class Dashboard extends Component {
                 )} Orang`}
                 icon="fa fa-users text-white"
               />
-              <Cards
-                classCols="col-md-6 col-xl-3 box-margin"
-                title="SALDO BONUS MEMBER"
-                data={toCurrency(
-                  isNaN(data.saldo_bonus_member)
-                    ? 0
-                    : parseFloat(data.saldo_bonus_member).toFixed(0)
-                )}
-                icon="fa fa-money text-white"
-              />
-              <Cards
-                classCols="col-md-6 col-xl-3 box-margin"
-                title="SALDO NASIONAL MEMBER"
-                data={toCurrency(
-                  isNaN(data.saldo_nasional_member)
-                    ? 0
-                    : parseFloat(data.saldo_nasional_member).toFixed(0)
-                )}
-                icon="fa fa-money text-white"
-              />
-              <Cards
-                classCols="col-md-6 col-xl-3 box-margin"
-                title="TOTAL PENARIKAN"
-                data={toCurrency(
-                  isNaN(data.total_wd)
-                    ? 0
-                    : parseFloat(data.total_wd).toFixed(0)
-                )}
-                icon="fa fa-money text-white"
-              />
-              <Cards
-                classCols="col-md-6 col-xl-3 box-margin"
-                title="OMSET NASIONAL"
-                data={toCurrency(
-                  isNaN(data.omset_nasional)
-                    ? 0
-                    : parseFloat(data.omset_nasional).toFixed(0)
-                )}
-                icon="fa fa-money text-white"
-              />
             </div>
             {/* Dashboard Widget Area */}
           </div>

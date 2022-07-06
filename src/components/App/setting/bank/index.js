@@ -63,14 +63,13 @@ class IndexBankPerusahaan extends Component {
 
   render() {
     const { pagination, data } = this.props;
-    console.log("props", data);
     const { where, detail } = this.state;
     const head = [
       { label: "No", className: "text-center", width: "1%" },
       { label: "#", className: "text-center", width: "1%" },
       { label: "Logo", width: "10%" },
-      { label: "Nama" },
-      { label: "Akun", width: "1%" },
+      { label: "Nama", width: "1%" },
+      { label: "Akun" },
       { label: "Status", width: "1%" },
       { label: "Tanggal", width: "1%" },
     ];

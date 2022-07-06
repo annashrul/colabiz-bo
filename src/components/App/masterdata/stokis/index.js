@@ -69,11 +69,11 @@ class IndexStokis extends Component {
   render() {
     const { pagination, data } = this.props;
     const { where, detail } = this.state;
+    console.log(pagination);
     const head = [
       { label: "No", className: "text-center", width: "1%" },
       { label: "#", className: "text-center", width: "1%" },
       { label: "Nama", width: "1%" },
-      { label: "Email", width: "1%" },
       { label: "Alamat" },
       { label: "Akun Bank", width: "1%" },
       { label: "Status", className: "text-center", width: "1%" },
@@ -99,6 +99,7 @@ class IndexStokis extends Component {
             current_page: pagination.current_page,
             per_page: pagination.per_page,
           }}
+          callbackPage={this.handlePageChange.bind(this)}
           current_page={pagination.current_page}
           renderRow={
             typeof data === "object"
@@ -153,7 +154,6 @@ class IndexStokis extends Component {
                           {v.name}
                           <br /> {v.mobile_no}
                         </td>
-                        <td className="middle nowrap">{v.email}</td>
                         <td className="middle nowrap">
                           {v.main_address},{v.kecamatan} , {v.kota},{v.provinsi}
                         </td>
@@ -162,7 +162,7 @@ class IndexStokis extends Component {
                           <br />
                           {v.acc_name} ({v.acc_no})
                         </td>
-                        <td className="middle nowrap text-center">{status}</td>
+                        <td className="middle nowrap">{status}</td>
                         <td className="middle nowrap">
                           {myDate(v.created_at)}
                         </td>

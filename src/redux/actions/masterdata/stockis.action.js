@@ -34,9 +34,9 @@ export function setDataDetail(data = []) {
 
 export const getStockis = (where = "") => {
   return (dispatch) => {
-    let url = "stockis";
+    let url = "stockis?perpage=10";
     if (where !== "") {
-      url += `?${where}`;
+      url += `&${where}`;
     }
     handleGet(url, (res) => {
       dispatch(setData(res));
