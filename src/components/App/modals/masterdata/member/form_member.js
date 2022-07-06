@@ -29,8 +29,8 @@ const myState = {
   status: "1",
   data_status: [
     { label: "Aktif", value: 1 },
-    { label: "Belum Bayar", value: 0 },
-    { label: "Recycle", value: 3 },
+    { label: "Tidak Aktif", value: 0 },
+    { label: "Suspend", value: 2 },
   ],
 };
 

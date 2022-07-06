@@ -32,7 +32,7 @@ class IndexMember extends Component {
       where: "",
       isModalFormMember: false,
       isModalFormBankMember: false,
-      isModalFormPin:false,
+      isModalFormPin: false,
       status_data: [
         { value: "", label: "semua status" },
         { value: "0", label: "Belum Bayar" },
@@ -79,15 +79,14 @@ class IndexMember extends Component {
       this.setState({
         isModalFormMember: true,
         isModalFormPin: false,
-        isModalFormBankMember: false
+        isModalFormBankMember: false,
       });
-    } else if (type === 'formMemberPin') {
+    } else if (type === "formMemberPin") {
       this.setState({
         isModalFormBankMember: false,
         isModalFormMember: false,
         isModalFormPin: true,
       });
-
     } else {
       this.props.dispatch(getMemberDetail(par.id));
       this.props.dispatch(getGeneralBank());
@@ -110,13 +109,13 @@ class IndexMember extends Component {
       { label: "#", className: "text-center", width: "1%" },
       { label: "Foto", width: "1%" },
       { label: "Nama" },
+      { label: "Email" },
       { label: "Username", width: "1%" },
       { label: "No.Handphone", width: "1%" },
       { label: "Referral", width: "1%" },
       { label: "Sponsor", width: "1%" },
       { label: "Saldo Pending", width: "1%" },
       { label: "Status", width: "1%" },
-      { label: "Tanggal Recycle", width: "1%" },
       { label: "Tanggal Gabung", width: "1%" },
     ];
 
@@ -165,9 +164,9 @@ class IndexMember extends Component {
                             ]}
                             callback={(e) => {
                               if (e === 0) this.handleModal(v, "formMember");
-                              if (e === 1) this.handleModal(v, "formBankMember");
+                              if (e === 1)
+                                this.handleModal(v, "formBankMember");
                               if (e === 2) this.handleModal(v, "formMemberPin");
-                              
                             }}
                           />
                         </td>
@@ -181,6 +180,7 @@ class IndexMember extends Component {
                           />
                         </td>
                         <td className="middle nowrap">{v.fullname}</td>
+                        <td className="middle nowrap">{v.email}</td>
                         <td className="middle nowrap">{v.uid}</td>
                         <td className="middle nowrap">{v.mobile_no}</td>
                         <td className="middle nowrap">{v.referral}</td>
@@ -194,13 +194,10 @@ class IndexMember extends Component {
                         </td>
                         <td className="middle nowrap">
                           {v.status === 0
-                            ? "Belum Bayar"
+                            ? "Tidak Aktif"
                             : v.status === 1
                             ? "Aktif"
-                            : "Recycle"}
-                        </td>
-                        <td className="middle nowrap">
-                          {v.status === 3 ? myDate(v.recycle_date) : "-"}
+                            : "Suspend"}
                         </td>
                         <td className="middle nowrap">
                           {myDate(v.created_at)}
@@ -215,7 +212,7 @@ class IndexMember extends Component {
             {
               data: [
                 {
-                  colSpan: 8,
+                  colSpan: 9,
                   label: "Total perhalaman",
                   className: "text-left",
                 },
@@ -236,10 +233,8 @@ class IndexMember extends Component {
         ) : null}
 
         {this.props.isOpen && this.state.isModalFormPin ? (
-          <FormPin detail={detail}/>
+          <FormPin detail={detail} />
         ) : null}
-
-        
       </Layout>
     );
   }

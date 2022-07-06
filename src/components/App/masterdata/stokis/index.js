@@ -73,6 +73,7 @@ class IndexStokis extends Component {
       { label: "No", className: "text-center", width: "1%" },
       { label: "#", className: "text-center", width: "1%" },
       { label: "Nama", width: "1%" },
+      { label: "Email", width: "1%" },
       { label: "Alamat" },
       { label: "Akun Bank", width: "1%" },
       { label: "Status", className: "text-center", width: "1%" },
@@ -152,6 +153,7 @@ class IndexStokis extends Component {
                           {v.name}
                           <br /> {v.mobile_no}
                         </td>
+                        <td className="middle nowrap">{v.email}</td>
                         <td className="middle nowrap">
                           {v.main_address},{v.kecamatan} , {v.kota},{v.provinsi}
                         </td>
