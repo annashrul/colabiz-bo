@@ -35,9 +35,9 @@ class IndexMember extends Component {
       isModalFormPin: false,
       status_data: [
         { value: "", label: "semua status" },
-        { value: "0", label: "Belum Bayar" },
+        { value: "0", label: "Tidak Aktif" },
         { value: "1", label: "Aktif" },
-        { value: "3", label: "Recycle" },
+        { value: "2", label: "Suspend" },
       ],
       status: "",
       kolom_data: [
@@ -114,8 +114,10 @@ class IndexMember extends Component {
       { label: "No.Handphone", width: "1%" },
       { label: "Referral", width: "1%" },
       { label: "Sponsor", width: "1%" },
-      { label: "Saldo Pending", width: "1%" },
+      { label: "Saldo", width: "1%" },
       { label: "Status", width: "1%" },
+      { label: "Aktivasi", width: "1%" },
+      { label: "Stockis", width: "1%" },
       { label: "Tanggal Gabung", width: "1%" },
     ];
 
@@ -160,7 +162,7 @@ class IndexMember extends Component {
                             action={[
                               { label: "Ubah Data Diri" },
                               { label: "Ubah Data Bank" },
-                              { label: "Ubah PIN Transaksi" },
+                              // { label: "Ubah PIN Transaksi" },
                             ]}
                             callback={(e) => {
                               if (e === 0) this.handleModal(v, "formMember");
@@ -190,7 +192,11 @@ class IndexMember extends Component {
                             : v.sponsor_referral}
                         </td>
                         <td className="middle nowrap text-right poin">
-                          {toCurrency(parseFloat(v.saldo_pending).toFixed(0))}
+                          {toCurrency(
+                            parseFloat(
+                              v.saldo === null ? "0" : v.saldo
+                            ).toFixed(0)
+                          )}
                         </td>
                         <td className="middle nowrap">
                           {v.status === 0
@@ -198,6 +204,18 @@ class IndexMember extends Component {
                             : v.status === 1
                             ? "Aktif"
                             : "Suspend"}
+                        </td>
+                        <td className="middle nowrap">
+                          {v.activate === 0 ? "Belum Aktivasi" : "Aktif"}
+                        </td>
+                        <td className="middle nowrap">
+                          {v.stockis === 0
+                            ? "Bukan Stockis"
+                            : v.stockis === 1
+                            ? "Stockis Aktif"
+                            : v.stockis === 2
+                            ? "Pending Review"
+                            : "Suspend Stockis"}
                         </td>
                         <td className="middle nowrap">
                           {myDate(v.created_at)}

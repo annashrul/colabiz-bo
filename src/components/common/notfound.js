@@ -15,7 +15,7 @@ export default class Footer extends Component {
         }
     }
     componentWillMount() {
-        document.title = `Page Not Found - Prowara`;
+        document.title = `Page Not Found - KolaBiz`;
     }
     render() {
         return (
