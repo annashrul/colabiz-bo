@@ -101,8 +101,12 @@ export const KATEGORI_BERITA = {
  *****************/
 let prefPaket = "PAKET";
 export const PAKET = {
-  LOADING: `SET_${prefPaket}_LOADING`,
-  SUCCESS: `SUCCESS_${prefPaket}`,
+  LOADING_REGISTER: `SET_${prefPaket}_LOADING_REGISTER`,
+  REGISTER: `REGISTER_${prefPaket}`,
+  LOADING_SMART_CONTRACT: `SET_${prefPaket}_LOADING_SMART_CONTRACT`,
+  SMART_CONTRACT: `SMART_CONTRACT_${prefPaket}`,
+  LOADING_HAPPY_SHOPPING: `SET_${prefPaket}_LOADING_HAPPY_SHOPPING`,
+  HAPPY_SHOPPING: `HAPPY_SHOPPING_${prefPaket}`,
 };
 /****************
  KATEGORI PAKET
@@ -165,6 +169,14 @@ let prefBank = "BANK";
 export const BANK = {
   LOADING: `SET_${prefBank}_LOADING`,
   SUCCESS: `SUCCESS_${prefBank}`,
+};
+/****************
+     ALOKASI
+     *****************/
+let prefAlokasi = "ALOKASI";
+export const ALOKASI = {
+  LOADING: `SET_${prefAlokasi}_LOADING`,
+  SUCCESS: `SUCCESS_${prefAlokasi}`,
 };
 /****************
      CONTENT

@@ -100,6 +100,7 @@ class FormUserLevel extends Component {
       });
       return;
     }
+    console.log(parseData);
     if (this.props.detail.id === "") {
       this.props.dispatch(postUserLevel(parseData, this.props.detail.where));
       this.clearState();
@@ -137,7 +138,10 @@ class FormUserLevel extends Component {
               return val.sub === undefined ? (
                 <div style={{ zoom: "80%" }} className="col-md-12" key={key}>
                   <div className="form-group">
-                    <label htmlFor="">{val.label.replace("_", " ")}</label>
+                    <label htmlFor="">
+                      <i className={val.icons}></i>&nbsp;
+                      {val.label.replace("_", " ").replace("-", " ")}
+                    </label>
                     <br />
                     <Switch
                       onChange={(e) => this.handleAllChecked(e, val.id)}
@@ -149,7 +153,10 @@ class FormUserLevel extends Component {
               ) : (
                 <div style={{ zoom: "80%" }} className="col-md-12" key={key}>
                   <div className="form-group">
-                    <label htmlFor="">{val.label.replace("_", " ")}</label>
+                    <label htmlFor="">
+                      <i className={val.icons}></i>&nbsp;
+                      {val.label.replace("_", " ").replace("-", " ")}
+                    </label>
                     <br />
                     <Switch
                       onChange={(e) => this.handleAllChecked(e, val.id)}
@@ -172,7 +179,7 @@ class FormUserLevel extends Component {
                         >
                           <div className="form-group">
                             <label htmlFor="">
-                              {row.label.replace("_", " ")}
+                              {row.label.replace("_", " ").replace("-", " ")}
                             </label>
                             <br />
                             <Switch
@@ -190,7 +197,9 @@ class FormUserLevel extends Component {
                                     <div className="col-md-3" key={i}>
                                       <div className="form-group">
                                         <label htmlFor="">
-                                          {res.label.replace("_", " ")}
+                                          {res.label
+                                            .replace("_", " ")
+                                            .replace("-", " ")}
                                         </label>
                                         <br />
                                         <Switch

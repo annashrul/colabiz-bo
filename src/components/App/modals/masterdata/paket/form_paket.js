@@ -17,6 +17,7 @@ import {
 } from "../../../../../redux/actions/masterdata/paket.action";
 import SelectCommon from "../../../../common/SelectCommon";
 import File64 from "../../../../common/File64";
+import CKEditor from "react-ckeditor-component";
 
 const myState = {
   title: "",
@@ -25,8 +26,8 @@ const myState = {
   stock: "",
   status: "1",
   gambar: "-",
-  id_category: "",
-  category_data: [],
+  alokasi: "",
+  alokasi_data: [],
   status_data: [
     { value: "1", label: "Aktif" },
     { value: "0", label: "Tidak Aktif" },
@@ -41,6 +42,7 @@ class FormPaket extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleChangeCkeditor = this.handleChangeCkeditor.bind(this);
     this.state = myState;
   }
 
@@ -49,16 +51,17 @@ class FormPaket extends Component {
   }
   getProps(props) {
     let state = {};
-    if (props.dataCategory !== undefined) {
-      if (props.dataCategory.length > 0) {
+    if (props.dataAlokasi !== undefined) {
+      if (props.dataAlokasi.length > 0) {
         let data = [];
-        props.dataCategory.forEach((v, i) => {
-          data.push({ value: v.id, label: v.title });
+        props.dataAlokasi.forEach((v, i) => {
+          data.push({ value: v.id, label: v.type });
         });
-        Object.assign(state, { category_data: data });
+        Object.assign(state, { alokasi_data: data });
       }
     }
     if (props.detail.id !== "") {
+      this.state.alokasi = props.detail.val.id_alokasi;
       props.detail.val.status = `${props.detail.val.status}`.toString();
       const compare = compareObjectResAndState(props.detail.val, this.state);
       console.log("compare", compare);
@@ -84,6 +87,12 @@ class FormPaket extends Component {
       });
     }
   }
+  handleChangeCkeditor(evt) {
+    var newContent = evt.editor.getData();
+    this.setState({
+      caption: newContent,
+    });
+  }
 
   handleSelect(col, val) {
     this.setState({ [col]: val.value });
@@ -104,14 +113,22 @@ class FormPaket extends Component {
       }
     }
     if (this.props.detail.id === "") {
-      this.props.dispatch(postPaket(justStrings, this.props.detail.where));
+      this.props.dispatch(
+        postPaket(
+          justStrings,
+          this.props.detail.where,
+          this.props.detail.typeCode
+        )
+      );
     } else {
-      this.props.dispatch(putPaket(justStrings, this.props.detail));
+      this.props.dispatch(
+        putPaket(justStrings, this.props.detail, this.props.detail.typeCode)
+      );
     }
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: rmComma(event.target.value) });
   };
 
   toggle(e) {
@@ -128,7 +145,9 @@ class FormPaket extends Component {
         size="md"
       >
         <ModalHeader toggle={this.toggle}>
-          {this.props.detail.id !== "" ? `Ubah Paket` : `Tambah Paket`}
+          {this.props.detail.id !== ""
+            ? `Ubah Paket ${this.props.detail.type}`
+            : `Tambah Paket ${this.props.detail.type}`}
         </ModalHeader>
         <ModalBody>
           <div className="form-group">
@@ -138,6 +157,17 @@ class FormPaket extends Component {
               className="form-control"
               name="title"
               value={this.state.title}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Harga</label>
+            <input
+              type="text"
+              className="form-control"
+              name="price"
+              value={toRp(this.state.price)}
               onChange={this.handleChange}
             />
           </div>
@@ -151,21 +181,11 @@ class FormPaket extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="form-group">
-            <label>Harga</label>
-            <input
-              type="text"
-              className="form-control"
-              name="price"
-              value={toRp(this.state.price)}
-              onChange={this.handleChange}
-            />
-          </div>
           <SelectCommon
             label="Kategori"
-            options={this.state.category_data}
-            dataEdit={this.state.id_category}
-            callback={(res) => this.handleSelect("id_category", res)}
+            options={this.state.alokasi_data}
+            dataEdit={this.state.alokasi}
+            callback={(res) => this.handleSelect("alokasi", res)}
           />
           <SelectCommon
             label="Status"
@@ -175,11 +195,12 @@ class FormPaket extends Component {
           />
           <div className="form-group">
             <label>Deskripsi</label>
-            <textarea
-              className="form-control"
-              name="caption"
-              onChange={this.handleChange}
-              defaultValue={this.state.caption}
+            <CKEditor
+              activeClass="p10"
+              content={this.state.caption}
+              events={{
+                change: this.handleChangeCkeditor,
+              }}
             />
           </div>
           <div className="form-group">
@@ -237,7 +258,7 @@ const mapStateToProps = (state) => {
   return {
     isOpen: state.modalReducer,
     type: state.modalTypeReducer,
-    dataCategory: state.kategoriPaketReducer.data,
+    dataAlokasi: state.alokasiReducer.data,
   };
 };
 

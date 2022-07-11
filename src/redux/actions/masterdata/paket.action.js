@@ -7,38 +7,66 @@ import {
   handlePut,
 } from "../../handle_http";
 
-export function setLoading(load) {
+export function setLoadingRegister(load) {
   return {
-    type: PAKET.LOADING,
+    type: PAKET.LOADING_REGISTER,
     load,
   };
 }
-export function setData(data = []) {
+export function setLoadingSmartContract(load) {
   return {
-    type: PAKET.SUCCESS,
+    type: PAKET.LOADING_SMART_CONTRACT,
+    load,
+  };
+}
+export function setLoadingHappyShopping(load) {
+  return {
+    type: PAKET.LOADING_SMART_CONTRACT,
+    load,
+  };
+}
+export function setDataRegister(data = []) {
+  return {
+    type: PAKET.REGISTER,
+    data,
+  };
+}
+export function setDataSmartContract(data = []) {
+  return {
+    type: PAKET.SMART_CONTRACT,
+    data,
+  };
+}
+export function setDataHappyShopping(data = []) {
+  return {
+    type: PAKET.HAPPY_SHOPPING,
     data,
   };
 }
 
-export const getPaket = (where, isClear = false) => {
+export const getPaket = (where, type = "REGISTER") => {
   return (dispatch) => {
-    let url = "paket";
+    let url = `paket/list/${type}`;
     if (where) {
       url += `?${where}&perpage=10`;
     }
-    handleGet(
-      url,
-      (res) => {
-        dispatch(setData(res));
-      },
-      isClear
-    );
+    handleGet(url, (res) => {
+      if (type === "REGISTER") {
+        dispatch(setDataRegister(res));
+      }
+      if (type === "SMART_CONTRACT") {
+        dispatch(setDataSmartContract(res));
+      }
+      if (type === "HAPPY_SHOPPING") {
+        dispatch(setDataHappyShopping(res));
+      }
+    });
   };
 };
-export const postPaket = (data, where) => {
+export const postPaket = (data, where, type = "REGISTER") => {
   return (dispatch) => {
     handlePost(`paket`, data, (res, msg, status) => {
-      dispatch(getPaket(where));
+      dispatch(getPaket(where, type));
       if (status) {
         dispatch(ModalToggle(false));
       }
@@ -46,23 +74,24 @@ export const postPaket = (data, where) => {
   };
 };
 
-export const putPaket = (data, detail) => {
+export const putPaket = (data, detail, type = "REGISTER") => {
+  console.log("#####################", type);
   return (dispatch) => {
     handlePut(`paket/${detail.id}`, data, (res, msg, status) => {
-      dispatch(getPaket(detail.where));
+      dispatch(getPaket(detail.where, type));
       if (status) {
         dispatch(ModalToggle(false));
       }
     });
   };
 };
-export const deletePaket = (data) => {
+export const deletePaket = (data, type = "REGISTER") => {
   return (dispatch) => {
     handleDelete(`paket/${data.id}`, () => {
       if (data.total === 1) {
-        dispatch(getPaket("page=1"));
+        dispatch(getPaket("page=1", type));
       } else {
-        dispatch(getPaket(data.where));
+        dispatch(getPaket(data.where, type));
       }
     });
   };

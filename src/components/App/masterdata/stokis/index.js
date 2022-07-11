@@ -23,6 +23,7 @@ import {
   approveStockis,
   getDetailStockis,
   getStockis,
+  putStockis,
 } from "../../../../redux/actions/masterdata/stockis.action";
 
 class IndexStokis extends Component {
@@ -32,6 +33,24 @@ class IndexStokis extends Component {
       detail: {},
       any: "",
       where: "",
+      kolom_data: [
+        { value: "mobile_no", label: "Telepon" },
+        { value: "name", label: "Nama" },
+        { value: "acc_name", label: "Atas Nama" },
+        { value: "main_address", label: "Alamat" },
+        { value: "provinsi", label: "Provinsi" },
+        { value: "kota", label: "Kota" },
+        { value: "kecamatan", label: "Kecamatan" },
+      ],
+      kolom: "",
+      status_data: [
+        { value: "", label: "semua status" },
+        { value: "0", label: "Bukan Stokis" },
+        { value: "1", label: "Stokis" },
+        { value: "2", label: "Sedang Diverifikasi" },
+        { value: "3", label: "Suspend" },
+      ],
+      status: "",
     };
     this.handleModal = this.handleModal.bind(this);
   }
@@ -65,7 +84,17 @@ class IndexStokis extends Component {
     this.props.dispatch(ModalToggle(bool));
     this.props.dispatch(ModalType("formTestimoni"));
   }
-
+  handleApproval(id, status) {
+    console.log(this.state.where);
+    swallOption(
+      `anda yakin akan ${status === 1 ? "menerima" : "menolak"} stokis ini ??`,
+      () => {
+        let parsedata = { status: status };
+        let detail = { id: id, where: this.state.where };
+        this.props.dispatch(putStockis(parsedata, detail));
+      }
+    );
+  }
   render() {
     const { pagination, data } = this.props;
     const { where, detail } = this.state;
@@ -83,8 +112,14 @@ class IndexStokis extends Component {
     return (
       <Layout page={"Daftar Stokis"}>
         <HeaderGeneralCommon
-          col="col-md-12"
+          col="col-md-3"
           pathName="daftarStokis"
+          isOther={true}
+          otherName="status"
+          otherState="status"
+          otherData={this.state.status_data}
+          isColumn={true}
+          columnData={this.state.kolom_data}
           callbackGet={(res) => {
             this.setState({ any: res });
             this.handleGet(res, 1);
@@ -106,7 +141,11 @@ class IndexStokis extends Component {
               ? data.length > 0
                 ? data.map((v, i) => {
                     let status = "";
-                    let actionButton = [{ label: "Detail" }];
+                    let actionButton = [
+                      { label: "Detail" },
+                      { label: "Terima" },
+                      { label: "Tolak" },
+                    ];
                     if (v.status === 0) {
                       actionButton.push({ label: "Jadikan Stokis" });
                     }
@@ -130,7 +169,9 @@ class IndexStokis extends Component {
                             action={actionButton}
                             callback={(e) => {
                               if (e === 0) this.handleModal(v);
-                              if (e === 1) {
+                              if (e === 1) this.handleApproval(v.id, 1);
+                              if (e === 2) this.handleApproval(v.id, 2);
+                              if (e === 3) {
                                 swallOption(
                                   `deposit ${toCurrency(
                                     10000000

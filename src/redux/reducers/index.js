@@ -24,6 +24,7 @@ import { reportTransaksiPenjualanReducer } from "./laporan/transaksi_penjualan.r
 import { generalReducer } from "./setting/general.reducer";
 import { bankPerusahaanReducer } from "./setting/bank.reducer";
 import { kurirReducer } from "./setting/kurir.reducer";
+import { alokasiReducer } from "./setting/alokasi.reducer";
 
 export default combineReducers({
   modalReducer,
@@ -48,6 +49,7 @@ export default combineReducers({
   generalReducer,
   bankPerusahaanReducer,
   kurirReducer,
+  alokasiReducer,
   reportTransaksiMemberReducer,
   reportTransaksiPenjualanReducer,
   auth: authReducer,

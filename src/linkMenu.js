@@ -2,7 +2,9 @@ import IndexMember from "./components/App/masterdata/member/index";
 import IndexStokis from "./components/App/masterdata/stokis/index";
 import IndexUser from "./components/App/masterdata/pengguna/index";
 import IndexUserLevel from "./components/App/masterdata/pengguna/level";
-import IndexPaket from "./components/App/masterdata/paket/index";
+import IndexPaketRegister from "./components/App/masterdata/paket/register";
+import IndexPaketSmartContract from "./components/App/masterdata/paket/smartContract";
+import IndexPaketHappyShopping from "./components/App/masterdata/paket/happyShopping";
 import IndexKategoriPaket from "./components/App/masterdata/paket/kategori";
 import IndexTipePaket from "./components/App/masterdata/paket/tipe";
 import IndexBerita from "./components/App/masterdata/berita/indexBerita";
@@ -14,7 +16,7 @@ import IndexLaporanPenjualan from "./components/App/laporan/transaksi/penjualan"
 import IndexLaporanMember from "./components/App/laporan/transaksi/member";
 import IndexPengaturaBank from "./components/App/setting/bank";
 import IndexPengaturanUmum from "./components/App/setting/umum";
-// import IndexPengaturanKurir from "./components/App/setting/kurir";
+import IndexPengaturanAlokasi from "./components/App/setting/alokasi";
 // import IndexPengaturanLanding from "./components/App/setting/website";
 
 export const LinkMenu = {
@@ -23,7 +25,9 @@ export const LinkMenu = {
   indexStokis: "/masterdata/stokis",
   indexUser: "/masterdata/pengguna",
   indexUserLevel: "/masterdata/pengguna/akses",
-  indexPaket: "/masterdata/paket",
+  indexPaketRegister: "/masterdata/paket/register",
+  indexPaketSmartContract: "/masterdata/paket/smart-contract",
+  indexPaketHappyShopping: "/masterdata/paket/happy-shopping",
   indexKategoriPaket: "/masterdata/paket/kategori",
   indexTipePaket: "/masterdata/paket/tipe",
   indexBerita: "/masterdata/berita",
@@ -37,6 +41,7 @@ export const LinkMenu = {
   indexPengaturanBank: "/pengaturan/bank",
   indexPengaturanKurir: "/pengaturan/kurir",
   indexPengaturanLanding: "/pengaturan/landing",
+  indexPengaturanAlokasi: "/pengaturan/alokasi",
 };
 
 export const menuItem = [
@@ -44,7 +49,15 @@ export const menuItem = [
   { link: LinkMenu.indexStokis, component: IndexStokis },
   { link: LinkMenu.indexUser, component: IndexUser },
   { link: LinkMenu.indexUserLevel, component: IndexUserLevel },
-  { link: LinkMenu.indexPaket, component: IndexPaket },
+  { link: LinkMenu.indexPaketRegister, component: IndexPaketRegister },
+  {
+    link: LinkMenu.indexPaketSmartContract,
+    component: IndexPaketSmartContract,
+  },
+  {
+    link: LinkMenu.indexPaketHappyShopping,
+    component: IndexPaketHappyShopping,
+  },
   { link: LinkMenu.indexKategoriPaket, component: IndexKategoriPaket },
   { link: LinkMenu.indexTipePaket, component: IndexTipePaket },
   { link: LinkMenu.indexBerita, component: IndexBerita },
@@ -56,6 +69,7 @@ export const menuItem = [
   { link: LinkMenu.indexLaporanPenjualan, component: IndexLaporanPenjualan },
   { link: LinkMenu.indexPengaturanUmum, component: IndexPengaturanUmum },
   { link: LinkMenu.indexPengaturanBank, component: IndexPengaturaBank },
+  { link: LinkMenu.indexPengaturanAlokasi, component: IndexPengaturanAlokasi },
   // { link: LinkMenu.indexPengaturanKurir, component: IndexPengaturanKurir },
   // { link: LinkMenu.indexPengaturanLanding, component: IndexPengaturanLanding },
 ];
@@ -81,7 +95,7 @@ export const menu = () => {
       icons: "fa fa-diamond",
     },
     {
-      id: 1000,
+      id: 3000,
       label: "testimoni",
       path: LinkMenu.indexTestimoni,
       isChecked: false,
@@ -110,6 +124,37 @@ export const menu = () => {
           label: "akses",
           path: LinkMenu.indexUserLevel,
           parent: "pengguna",
+          isChecked: false,
+        },
+      ],
+    },
+    {
+      id: 1000,
+      label: "paket",
+      path: "",
+      isChecked: false,
+      isToggle: false,
+      icons: "fa fa-list",
+      sub: [
+        {
+          id: 1001,
+          label: "register",
+          path: LinkMenu.indexPaketRegister,
+          parent: "paket",
+          isChecked: false,
+        },
+        {
+          id: 1002,
+          label: "smart-contract",
+          path: LinkMenu.indexPaketSmartContract,
+          parent: "paket",
+          isChecked: false,
+        },
+        {
+          id: 1003,
+          label: "happy-shopping",
+          path: LinkMenu.indexPaketHappyShopping,
+          parent: "paket",
           isChecked: false,
         },
       ],
@@ -191,13 +236,13 @@ export const menu = () => {
       isToggle: false,
       icons: "fa fa-cogs",
       sub: [
-        // {
-        //   id: 16,
-        //   label: "umum",
-        //   path: LinkMenu.indexPengaturanUmum,
-        //   parent: "pengaturan",
-        //   isChecked: false,
-        // },
+        {
+          id: 16,
+          label: "alokasi",
+          path: LinkMenu.indexPengaturanAlokasi,
+          parent: "pengaturan",
+          isChecked: false,
+        },
         {
           id: 17,
           label: "bank",

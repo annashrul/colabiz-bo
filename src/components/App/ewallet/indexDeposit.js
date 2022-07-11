@@ -202,10 +202,10 @@ class IndexDeposit extends Component {
           pathName="laporanDeposit"
           col="col-md-3"
           isOther={true}
-          isColumn={true}
           otherName="status"
           otherState="status"
           otherData={this.state.status_data}
+          isColumn={true}
           columnData={this.state.kolom_data}
           callbackGet={(res) => this.handleGet(res)}
           callbackExport={() =>
