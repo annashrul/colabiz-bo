@@ -91,7 +91,7 @@ class IndexStokis extends Component {
       () => {
         let parsedata = { status: status };
         let detail = { id: id, where: this.state.where };
-        this.props.dispatch(putStockis(parsedata, detail));
+        this.props.dispatch(approveStockis(parsedata, detail));
       }
     );
   }
@@ -168,8 +168,8 @@ class IndexStokis extends Component {
                             action={actionButton}
                             callback={(e) => {
                               if (e === 0) this.handleModal(v);
-                              else if (e === 1) this.handleApproval(v.id, 1);
-                              else if (e === 2) this.handleApproval(v.id, 2);
+                              else if (e === 1) this.handleApproval(v.id_member, 1);
+                              else if (e === 2) this.handleApproval(v.id_member, 2);
                             }}
                           />
                         </td>

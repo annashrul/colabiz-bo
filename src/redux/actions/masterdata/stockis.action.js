@@ -66,11 +66,11 @@ export const postStockis = (data, where) => {
     });
   };
 };
-export const approveStockis = (detail) => {
+export const approveStockis = (data,detail) => {
   return (dispatch) => {
     handlePut(
       `transaction/aktivasi_stockis/${detail.id}/approve`,
-      {},
+      data,
       (res, msg, status) => {
         dispatch(getStockis(detail.where));
       }
