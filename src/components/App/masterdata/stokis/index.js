@@ -143,11 +143,10 @@ class IndexStokis extends Component {
                     let status = "";
                     let actionButton = [
                       { label: "Detail" },
-                      { label: "Terima" },
-                      { label: "Tolak" },
                     ];
                     if (v.status === 0) {
-                      actionButton.push({ label: "Jadikan Stokis" });
+                      actionButton.push({ label: "Terima" });
+                      actionButton.push({ label: "Tolak" });
                     }
                     if (v.status === 0) {
                       status = "Bukan Stokis";
@@ -169,25 +168,8 @@ class IndexStokis extends Component {
                             action={actionButton}
                             callback={(e) => {
                               if (e === 0) this.handleModal(v);
-                              if (e === 1) this.handleApproval(v.id, 1);
-                              if (e === 2) this.handleApproval(v.id, 2);
-                              if (e === 3) {
-                                swallOption(
-                                  `deposit ${toCurrency(
-                                    10000000
-                                  )} akan langsung dimasukan ke saldo member`,
-                                  () => {
-                                    this.props.dispatch(
-                                      approveStockis({
-                                        id: v.id_member,
-                                        where: where,
-                                      })
-                                    );
-                                  },
-                                  null,
-                                  `Jadikan ${v.name} stokis`
-                                );
-                              }
+                              else if (e === 1) this.handleApproval(v.id, 1);
+                              else if (e === 2) this.handleApproval(v.id, 2);
                             }}
                           />
                         </td>

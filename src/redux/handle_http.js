@@ -22,7 +22,7 @@ export const loading = (isStatus = true, title = "Silahkan tunggu.") => {
 };
 
 export const handleError = (err) => {
-  console.log(err.response.data.meta);
+  // console.log(err.response.data.meta);
   if (err.response !== undefined) {
     if (err.response.data.meta.message !== undefined) {
       swal(err.response.data.meta.message);
