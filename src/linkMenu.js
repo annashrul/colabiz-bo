@@ -160,30 +160,30 @@ export const menu = () => {
       ],
     },
 
-    // {
-    //   id: 10,
-    //   label: "e-wallet",
-    //   path: "",
-    //   isChecked: false,
-    //   isToggle: false,
-    //   icons: "fa fa-credit-card",
-    //   sub: [
-    //     {
-    //       id: 11,
-    //       label: "deposit",
-    //       path: LinkMenu.indexDeposit,
-    //       parent: "e-wallet",
-    //       isChecked: false,
-    //     },
-    //     {
-    //       id: 12,
-    //       label: "penarikan",
-    //       path: LinkMenu.indexPenarikan,
-    //       parent: "e-wallet",
-    //       isChecked: false,
-    //     },
-    //   ],
-    // },
+    {
+      id: 10,
+      label: "e-wallet",
+      path: "",
+      isChecked: false,
+      isToggle: false,
+      icons: "fa fa-credit-card",
+      sub: [
+        {
+          id: 11,
+          label: "deposit",
+          path: LinkMenu.indexDeposit,
+          parent: "e-wallet",
+          isChecked: false,
+        },
+        {
+          id: 12,
+          label: "penarikan",
+          path: LinkMenu.indexPenarikan,
+          parent: "e-wallet",
+          isChecked: false,
+        },
+      ],
+    },
 
     {
       id: 350,
