@@ -5500,6 +5500,66 @@
 							"response": []
 						},
 						{
+							"name": "Update resi",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Project-ID",
+										"value": "{{project_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-From",
+										"value": "{{source}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"kd_trx\":\"INV/PE/220714/001,INV/PE/220714/010,INV/PE/220714/015,INV/PE/220715/004,INV/PE/220715/007\",\n    \"resi\":\"123321213\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}penjualan/update_resi",
+									"host": [
+										"{{url}}penjualan"
+									],
+									"path": [
+										"update_resi"
+									],
+									"query": [
+										{
+											"key": "searchby",
+											"value": "title",
+											"description": "Jika digunakan, pakai nama parameter dari object respon",
+											"disabled": true
+										},
+										{
+											"key": "q",
+											"value": "tatang",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "History Pembelian",
 							"request": {
 								"auth": {

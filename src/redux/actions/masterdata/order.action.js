@@ -1,6 +1,6 @@
 import { ORDER } from "../_constants";
-import { ModalToggle } from "../modal.action";
-import { handleGet } from "../../handle_http";
+import { ModalToggle, ModalType } from "../modal.action";
+import { handleGet, handlePut } from "../../handle_http";
 
 const folder = "penjualan/report";
 
@@ -45,7 +45,7 @@ export const getOrderMasterAction = (where) => {
   return (dispatch) => {
     let url = folder + "/order";
     if (where) {
-      url += `?${where}&perpage=10`;
+      url += `?${where}`;
     }
     handleGet(url, (res) => dispatch(setDataMaster(res)));
   };
@@ -71,5 +71,17 @@ export const getStokisAction = () => {
   return (dispatch) => {
     let url = folder + "/filter/stockis";
     handleGet(url, (res) => dispatch(setDataStokis(res)));
+  };
+};
+
+export const updateResiAction = (data, where, callback) => {
+  return (dispatch) => {
+    handlePut("penjualan/update_resi", data, (res, msg, status) => {
+      dispatch(ModalToggle(false));
+      dispatch(ModalType("formResi"));
+
+      console.log(status);
+      callback(status);
+    });
   };
 };

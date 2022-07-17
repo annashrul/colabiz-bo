@@ -164,11 +164,11 @@ class LaporanTransaksiMember extends Component {
           head={head}
           rowSpan={rowSpan}
           meta={{
-            total: pagination.total,
-            current_page: pagination.current_page,
-            per_page: pagination.per_page,
+            total: parseInt(pagination.total, 10),
+            current_page: parseInt(pagination.current_page, 10),
+            per_page: parseInt(pagination.per_page, 10),
           }}
-          current_page={pagination.current_page}
+          current_page={parseInt(pagination.current_page, 10)}
           callbackPage={this.handlePageChange.bind(this)}
           renderRow={
             typeof data === "object"
