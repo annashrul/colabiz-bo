@@ -351,11 +351,11 @@ class IndexOrder extends Component {
           columnData={kolom_data}
           isPeriode={true}
           pathName="laporanTransaksiPenjualan"
-          callbackExport={() =>
-            this.printDocumentXLsx(
-              paginationMaster.per_page * paginationMaster.last_page
-            )
-          }
+          // callbackExport={() =>
+          //   this.printDocumentXLsx(
+          //     paginationMaster.per_page * paginationMaster.last_page
+          //   )
+          // }
           renderFilterHtml={
             <div className="col-md-8">
               <div className="row">

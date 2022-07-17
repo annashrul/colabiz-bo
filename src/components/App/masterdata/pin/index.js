@@ -137,7 +137,7 @@ class IndexPin extends Component {
           isColumn={true}
           columnData={this.state.kolom_data}
         />
-        <TableCommon
+        {/* <TableCommon
           head={head}
           meta={{
             total: pagination.total,
@@ -253,7 +253,7 @@ class IndexPin extends Component {
 
         {this.props.isOpen && this.state.isModalFormPin ? (
           <FormPin detail={detail} />
-        ) : null}
+        ) : null} */}
       </Layout>
     );
   }
