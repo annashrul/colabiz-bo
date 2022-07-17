@@ -1,4 +1,6 @@
+import IndexPin from "./components/App/masterdata/pin/index";
 import IndexMember from "./components/App/masterdata/member/index";
+import IndexOrder from "./components/App/masterdata/order/index";
 import IndexStokis from "./components/App/masterdata/stokis/index";
 import IndexUser from "./components/App/masterdata/pengguna/index";
 import IndexUserLevel from "./components/App/masterdata/pengguna/level";
@@ -21,6 +23,9 @@ import IndexPengaturanAlokasi from "./components/App/setting/alokasi";
 
 export const LinkMenu = {
   dashboard: "/",
+  indexPin: "/masterdata/pin",
+  indexOrder: "/masterdata/order",
+  indexPin: "/masterdata/pin",
   indexMember: "/masterdata/member",
   indexStokis: "/masterdata/stokis",
   indexUser: "/masterdata/pengguna",
@@ -45,6 +50,8 @@ export const LinkMenu = {
 };
 
 export const menuItem = [
+  { link: LinkMenu.indexPin, component: IndexPin },
+  { link: LinkMenu.indexOrder, component: IndexOrder },
   { link: LinkMenu.indexMember, component: IndexMember },
   { link: LinkMenu.indexStokis, component: IndexStokis },
   { link: LinkMenu.indexUser, component: IndexUser },
@@ -86,6 +93,15 @@ export const menu = () => {
       icons: "fa fa-user-o",
     },
     {
+      id: 100000,
+      label: "order",
+      path: LinkMenu.indexOrder,
+      isChecked: false,
+      isToggle: false,
+      sub: undefined,
+      icons: "fa fa-shopping-cart",
+    },
+    {
       id: 2000,
       label: "stokis",
       path: LinkMenu.indexStokis,
@@ -93,6 +109,15 @@ export const menu = () => {
       isToggle: false,
       sub: undefined,
       icons: "fa fa-diamond",
+    },
+    {
+      id: 9000000,
+      label: "pin",
+      path: LinkMenu.indexPin,
+      isChecked: false,
+      isToggle: false,
+      sub: undefined,
+      icons: "fa fa-code",
     },
     {
       id: 3000,

@@ -228,25 +228,46 @@ export const swallOption = (
   });
 };
 
-export const statusOrder = (type, status, iswhite = false) => {
-  if (type === "dollar") {
-    return !iswhite ? (status ? dollarY : dollar) : dollarWhite;
-  } else if (type === "packing") {
-    return !iswhite
-      ? status
-        ? pack_deliveryY
-        : pack_delivery
-      : pack_deliveryWhite;
-  } else if (type === "delivered") {
-    return !iswhite
-      ? status
-        ? pack_deliveredY
-        : pack_delivered
-      : pack_deliveredWhite;
-  } else if (type === "truck") {
-    return !iswhite ? (status ? truckY : truck) : truckWhite;
-  } else if (type === "confirm") {
-    return !iswhite ? (status ? confirmY : confirm) : confirmWhite;
+export const statusOrder = (res) => {
+  if (res === 0) {
+    return <span className="badge badge-warning">Menunggu Pembayaran</span>;
+  } else if (res === 1) {
+    return <span className="badge badge-info">Diproses</span>;
+  } else if (res === 3) {
+    return (
+      <span
+        className="badge badge-success"
+        style={{ backgroundColor: "#2db7f5" }}
+      >
+        Dikirim
+      </span>
+    );
+  } else if (res === 4) {
+    return <span className="badge badge-success">Selesai</span>;
+  } else {
+    return <span className="badge badge-danger">Ditolak</span>;
+  }
+};
+
+export const statusPengambilan = (res) => {
+  if (res === 0) {
+    return (
+      <span
+        className="badge badge-success"
+        style={{ backgroundColor: "orange" }}
+      >
+        Belum Diambil
+      </span>
+    );
+  } else {
+    return (
+      <span
+        className="badge badge-success"
+        style={{ backgroundColor: "#d4af37 " }}
+      >
+        Sudah Diambil
+      </span>
+    );
   }
 };
 

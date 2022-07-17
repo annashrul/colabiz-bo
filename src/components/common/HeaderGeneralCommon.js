@@ -174,6 +174,7 @@ class HeaderGeneralCommon extends Component {
             />
           </div>
         ) : null}
+        {props.renderFilterHtml && props.renderFilterHtml}
 
         <div className={`col-12 col-xs-12 ${col}`}>
           <div className="form-group">

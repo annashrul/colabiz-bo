@@ -377,6 +377,19 @@ export const REPORT_TRANSAKSI_PENJUALAN = {
 };
 
 /****************
+     REPORT_TRANSAKSI PENJUALAN
+     *****************/
+let prefOrder = "ORDER";
+export const ORDER = {
+  LOADING_MASTER: `SET_${prefOrder}_LOADING_MASTER`,
+  LOADING_EXCEL: `SET_${prefOrder}_LOADING_EXCEL`,
+  DATA_MASTER: `DATA_MASTER_${prefOrder}`,
+  DATA_EXCEL: `DATA_EXCEL_${prefOrder}`,
+  DATA_RESI: `DATA_RESI_${prefOrder}`,
+  DATA_STOKIS: `DATA_STOKIS_${prefOrder}`,
+};
+
+/****************
      REPORT_PAKET
      *****************/
 let prefReportPaket = "REPORT_PAKET";

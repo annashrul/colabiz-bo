@@ -25,11 +25,12 @@ import { generalReducer } from "./setting/general.reducer";
 import { bankPerusahaanReducer } from "./setting/bank.reducer";
 import { kurirReducer } from "./setting/kurir.reducer";
 import { alokasiReducer } from "./setting/alokasi.reducer";
-
+import { orderReducer } from "./masterdata/order.reducer";
 export default combineReducers({
   modalReducer,
   modalTypeReducer,
   dashboardReducer,
+  orderReducer,
   siteReducer,
   paketReducer,
   kategoriPaketReducer,
