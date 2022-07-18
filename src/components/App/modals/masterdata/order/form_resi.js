@@ -6,6 +6,7 @@ import { ModalToggle } from "../../../../../redux/actions/modal.action";
 import { ToastQ } from "../../../../../helper";
 import { putMemberPin } from "../../../../../redux/actions/masterdata/member.action";
 import { updateResiAction } from "../../../../../redux/actions/masterdata/order.action";
+import { handleError } from "../../../../../redux/handle_http";
 const myState = {
   resi: "",
   kd_trx: "",
@@ -39,6 +40,13 @@ class FormResi extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let state = this.state;
+    if (state.resi === "") {
+      ToastQ.fire({
+        icon: "error",
+        title: `resi tidak boleh kosong`,
+      });
+      return;
+    }
     this.props.dispatch(
       updateResiAction(
         { kd_trx: this.props.detail.kdTrx, resi: state.resi },
