@@ -43,15 +43,14 @@ export function setDataStokis(data = []) {
 
 export const getOrderMasterAction = (where) => {
   return (dispatch) => {
-    dispatch(setLoadingMaster(true));
-
+    // dispatch(setLoadingMaster(true));
     let url = folder + "/order";
     if (where) {
       url += `?${where}`;
     }
     handleGet(url, (res) => {
       dispatch(setDataMaster(res));
-      dispatch(setLoadingMaster(false));
+      // dispatch(setLoadingMaster(false));
     });
   };
 };

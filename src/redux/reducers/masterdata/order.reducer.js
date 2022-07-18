@@ -1,7 +1,7 @@
 import { ORDER } from "../../actions/_constants";
 
 const initialState = {
-  loadingMaster: true,
+  loadingMaster: false,
   loadingExcel: false,
   dataMaster: [],
   dataExcel: [],

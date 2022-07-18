@@ -226,6 +226,7 @@ class IndexOrder extends Component {
           };
           this.setState({ detail: details });
         }
+
         this.setState({
           data: masterData,
           isDisableButtonResi: isDisableButtonResi,
@@ -245,7 +246,7 @@ class IndexOrder extends Component {
     let val = e.target.checked;
     let data = this.state.data;
     if (col === "checkAll") {
-      this.setState({ data: [] });
+      this.setState({ data: [], checkedAll: val });
       setTimeout(() => {
         let perpage = 10;
         if (val) {
@@ -254,9 +255,10 @@ class IndexOrder extends Component {
             : 10;
         }
         let where = `${this.checkFilter()}&perpage=${perpage}`;
-        setTimeout(() => this.props.dispatch(getOrderMasterAction(where)), 200);
-      }, 100);
-      this.setState({ checkedAll: val });
+        setTimeout(() => {
+          this.props.dispatch(getOrderMasterAction(where));
+        }, 200);
+      }, 200);
     } else {
       data[i].checked = val;
 
@@ -276,9 +278,10 @@ class IndexOrder extends Component {
         totalTrx: kdTrx.length,
       };
       this.setState({ detail: detail });
+      this.setState(data);
+      setTimeout(() => this.handleIsDisabledButton(!val), 100);
+      console.log("else");
     }
-    this.setState(data);
-    setTimeout(() => this.handleIsDisabledButton(!val), 100);
   }
 
   checkFilter() {
@@ -338,7 +341,7 @@ class IndexOrder extends Component {
       kdTrx_data,
     } = this.state;
     // console.log(kdTrx_data);
-
+    // console.log("where", data);
     return (
       <Layout page={"order"}>
         <HeaderGeneralCommon
@@ -378,9 +381,9 @@ class IndexOrder extends Component {
                         setTimeout(
                           () =>
                             this.props.dispatch(getOrderMasterAction(where)),
-                          100
+                          200
                         );
-                      }, 100);
+                      }, 200);
                     }}
                     dataEdit={stokis}
                   />
@@ -400,9 +403,9 @@ class IndexOrder extends Component {
                         setTimeout(
                           () =>
                             this.props.dispatch(getOrderMasterAction(where)),
-                          100
+                          200
                         );
-                      }, 100);
+                      }, 200);
                     }}
                     dataEdit={resi}
                   />
@@ -441,9 +444,8 @@ class IndexOrder extends Component {
             </div>
           </div>
         </div>
-        {!this.props.loadingMaster ? (
-          data !== undefined && data.length > 0 ? (
-            data.map((res, key) => {
+        {data !== undefined && data.length > 0
+          ? data.map((res, key) => {
               let totalQty = 0;
               let subTotal = 0;
 
@@ -451,7 +453,7 @@ class IndexOrder extends Component {
                 <div className="card mb-2" key={key}>
                   <div className="card-header">
                     <div className="row">
-                      <div className="col-md-12">
+                      <div className="col-md-11">
                         <div className="form-group">
                           <input
                             type="checkbox"
@@ -469,6 +471,9 @@ class IndexOrder extends Component {
                             {res.kd_trx}
                           </label>
                         </div>
+                      </div>
+                      <div className="col-md-1">
+                        <p className="text-right">{key + 1}</p>
                       </div>
                     </div>
                   </div>
@@ -580,12 +585,7 @@ class IndexOrder extends Component {
                 </div>
               );
             })
-          ) : (
-            ""
-          )
-        ) : (
-          <Preloader />
-        )}
+          : ""}
         <div style={{ marginTop: "20px", float: "right" }}>
           <Paginationq
             current_page={
