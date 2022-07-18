@@ -27,6 +27,7 @@ import SelectCommon from "../../../common/SelectCommon";
 import TableCommon from "../../../common/TableCommon";
 import Form_resi from "../../modals/masterdata/order/form_resi";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
+import Preloader from "../../../../Preloader";
 
 class IndexOrder extends Component {
   constructor(props) {
@@ -254,7 +255,7 @@ class IndexOrder extends Component {
         }
         let where = `${this.checkFilter()}&perpage=${perpage}`;
         setTimeout(() => this.props.dispatch(getOrderMasterAction(where)), 200);
-      }, 200);
+      }, 100);
       this.setState({ checkedAll: val });
     } else {
       data[i].checked = val;
@@ -302,7 +303,10 @@ class IndexOrder extends Component {
     this.setState({ isDisableButtonResi: isFalse });
   }
   handlePageChange(pageNumber) {
-    this.handleGet(this.state.where_data, pageNumber);
+    this.setState({ data: [] });
+    setTimeout(() => {
+      this.handleGet(this.state.where_data, pageNumber);
+    }, 100);
   }
 
   handleModal(e) {
@@ -374,9 +378,9 @@ class IndexOrder extends Component {
                         setTimeout(
                           () =>
                             this.props.dispatch(getOrderMasterAction(where)),
-                          200
+                          100
                         );
-                      }, 200);
+                      }, 100);
                     }}
                     dataEdit={stokis}
                   />
@@ -396,9 +400,9 @@ class IndexOrder extends Component {
                         setTimeout(
                           () =>
                             this.props.dispatch(getOrderMasterAction(where)),
-                          200
+                          100
                         );
-                      }, 200);
+                      }, 100);
                     }}
                     dataEdit={resi}
                   />
@@ -437,8 +441,9 @@ class IndexOrder extends Component {
             </div>
           </div>
         </div>
-        {data !== undefined && data.length > 0
-          ? data.map((res, key) => {
+        {!this.props.loadingMaster ? (
+          data !== undefined && data.length > 0 ? (
+            data.map((res, key) => {
               let totalQty = 0;
               let subTotal = 0;
 
@@ -575,7 +580,12 @@ class IndexOrder extends Component {
                 </div>
               );
             })
-          : ""}
+          ) : (
+            ""
+          )
+        ) : (
+          <Preloader />
+        )}
         <div style={{ marginTop: "20px", float: "right" }}>
           <Paginationq
             current_page={
@@ -599,7 +609,7 @@ class IndexOrder extends Component {
                     this.props.dispatch(
                       getOrderMasterAction(`${this.checkFilter()}&perpage=10`)
                     ),
-                  200
+                  100
                 );
               }
             }}
