@@ -82,12 +82,13 @@ export const handlePut = async (url, data, callback) => {
           swal(NOTIF_ALERT.SUCCESS);
           callback(datum, datum.msg, true);
         } else {
-          swal("NOTIF_ALERT.FAILED");
+          swal(NOTIF_ALERT.FAILED);
           callback(datum, datum.msg, false);
         }
       }, 800);
     })
     .catch(function (error) {
+      console.log(error);
       setTimeout(function () {
         loading(false);
         handleError(error);

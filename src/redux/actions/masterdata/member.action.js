@@ -74,19 +74,23 @@ export const putMemberPin = (data, detail) => {
 
 export const putMember = (data, detail) => {
   return (dispatch) => {
-    handlePut(`${folder}/update/data/${detail.id}`, data, (res, msg, status) => {
-      dispatch(getMember(detail.where));
-      if (status) {
-        dispatch(ModalToggle(false));
+    handlePut(
+      `${folder}/update/data/${detail.id}`,
+      data,
+      (res, msg, status) => {
+        dispatch(getMember(detail.where));
+        if (status) {
+          dispatch(ModalToggle(false));
+        }
       }
-    });
+    );
   };
 };
 
 export const putBankMember = (data, detail, idBank) => {
   return (dispatch) => {
     console.log(`${folder}/bank/${idBank}`);
-    handlePatch(`${folder}/bank/${idBank}`, data, (res, msg, status) => {
+    handlePut(`member/update/bank/${idBank}`, data, (res, msg, status) => {
       dispatch(getMember(detail.where));
       if (status) {
         dispatch(ModalToggle(false));
