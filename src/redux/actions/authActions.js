@@ -79,7 +79,6 @@ export const logoutUser = () => (dispatch) => {
   destroy("sess");
   dispatch(setLoggedin(false));
   localStorage.clear();
-
   // remove auth header for future request
   setAuthToken(false);
   // Set current user to {} and isAuthenticated to false

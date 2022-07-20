@@ -26,10 +26,12 @@ import { bankPerusahaanReducer } from "./setting/bank.reducer";
 import { kurirReducer } from "./setting/kurir.reducer";
 import { alokasiReducer } from "./setting/alokasi.reducer";
 import { orderReducer } from "./masterdata/order.reducer";
+import { rewardReducer } from "./masterdata/reward.reducer";
 export default combineReducers({
   modalReducer,
   modalTypeReducer,
   dashboardReducer,
+  rewardReducer,
   orderReducer,
   siteReducer,
   paketReducer,

@@ -71,7 +71,7 @@ export const handlePost = (url, data, callback) => {
     });
 };
 
-export const handlePut = async (url, data, callback) => {
+export const handlePut = async (url, data, callback, isNotif = true) => {
   loading(true);
   Axios.put(HEADERS.URL + url, data)
     .then(function (response) {
@@ -79,7 +79,7 @@ export const handlePut = async (url, data, callback) => {
         loading(false);
         const datum = response.data;
         if (datum.meta.status === "success") {
-          swal(NOTIF_ALERT.SUCCESS);
+          isNotif && swal(NOTIF_ALERT.SUCCESS);
           callback(datum, datum.msg, true);
         } else {
           swal(NOTIF_ALERT.FAILED);

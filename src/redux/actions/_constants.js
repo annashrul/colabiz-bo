@@ -21,8 +21,8 @@ export const NOTIF_ALERT = {
 
 export const HEADERS = {
   // URL: "http://localhost:6706/",
-  URL: "https://api.kolabiz.id/",
-  // URL: "https://api-dev.kolabiz.id/",
+  // URL: "https://api.kolabiz.id/",
+  URL: "https://api-dev.kolabiz.id/",
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2RiN2M5OC0wNWNmLTQ4NDgtOGM3Yy0yZTFiYTczZGUwNmYiLCJpYXQiOjE1NzAxNzM0ODYsImV4cCI6MTU3MDc3ODI4Nn0.1NiWtt2luG83am8FJSvWpL5p35Oxd8GSJJTwhFmAdgw",
   REQ: "backoffice",
@@ -62,6 +62,10 @@ export const STOCKIS = {
   GET_DETAIL: "GET_DETAIL",
   LOADING_DETAIL: "LOADING_DETAIL",
   LOADING_POST: "LOADING_POST",
+};
+export const REWARD = {
+  GET: "GET_REWARD",
+  GET_DETAIL: "GET_DETAIL_REWARD",
 };
 
 /****************

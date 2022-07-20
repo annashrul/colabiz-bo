@@ -1,3 +1,4 @@
+import IndexReward from "./components/App/masterdata/reward/index";
 import IndexPin from "./components/App/masterdata/pin/index";
 import IndexMember from "./components/App/masterdata/member/index";
 import IndexOrder from "./components/App/masterdata/order/index";
@@ -23,6 +24,7 @@ import IndexPengaturanAlokasi from "./components/App/setting/alokasi";
 
 export const LinkMenu = {
   dashboard: "/",
+  indexReward: "/masterdata/reward",
   indexPin: "/masterdata/pin",
   indexOrder: "/masterdata/order",
   indexPin: "/masterdata/pin",
@@ -50,6 +52,7 @@ export const LinkMenu = {
 };
 
 export const menuItem = [
+  { link: LinkMenu.indexReward, component: IndexReward },
   { link: LinkMenu.indexPin, component: IndexPin },
   { link: LinkMenu.indexOrder, component: IndexOrder },
   { link: LinkMenu.indexMember, component: IndexMember },
@@ -91,6 +94,15 @@ export const menu = () => {
       isToggle: false,
       sub: undefined,
       icons: "fa fa-user-o",
+    },
+    {
+      id: 1900,
+      label: "reward",
+      path: LinkMenu.indexReward,
+      isChecked: false,
+      isToggle: false,
+      sub: undefined,
+      icons: "fa fa-gift",
     },
     {
       id: 100000,

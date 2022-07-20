@@ -4,13 +4,20 @@ import connect from "react-redux/es/connect/connect";
 import Switch from "react-switch";
 import { ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { ModalToggle } from "../../../../../redux/actions/modal.action";
-import { ToastQ } from "../../../../../helper";
+import { swallOption, ToastQ } from "../../../../../helper";
 import { menu } from "../../../../../linkMenu";
 import {
   postUserLevel,
   putUserLevel,
 } from "../../../../../redux/actions/masterdata/user_level.action";
-
+import { store, destroy } from "../../../../../components/model/app.model";
+import setAuthToken from "../../../../../utils/setAuthToken";
+import {
+  setCurrentUser,
+  setLoggedin,
+} from "../../../../../redux/actions/authActions";
+// import { useHistory } from "react-router-dom";
+// const history = useHistory();
 class FormUserLevel extends Component {
   constructor(props) {
     super(props);
@@ -34,13 +41,14 @@ class FormUserLevel extends Component {
   }
 
   getProps(param) {
-    console.log(this.state.menu);
-    if (param.detail.id !== "") {
-      // this.setState({
-      //   lvl: param.detail.val.level,
-      //   menu: param.detail.val.access_level,
-      // });
-      this.setState({ lvl: param.detail.val.level, menu: this.state.menu });
+    console.log("detail", param.detail);
+    if (param.detail !== undefined && param.detail.id !== "") {
+      this.setState({
+        lvl: param.detail.val.level,
+        menu: param.detail.val.access_level,
+      });
+
+      // this.setState({ lvl: param.detail.val.level, menu: this.state.menu });
     } else {
       this.clearState();
     }
@@ -100,13 +108,30 @@ class FormUserLevel extends Component {
       });
       return;
     }
-    console.log(parseData);
     if (this.props.detail.id === "") {
       this.props.dispatch(postUserLevel(parseData, this.props.detail.where));
       this.clearState();
     } else {
-      this.props.dispatch(putUserLevel(parseData, this.props.detail));
-      this.clearState();
+      this.props.dispatch(
+        putUserLevel(parseData, this.props.detail, (res) => {
+          if (res) {
+            swallOption(
+              "silahkan keluar untuk menggunakan menu yang sudah dipilih",
+              () => {
+                window.location.href = "/login";
+                destroy("sess");
+                localStorage.clear();
+                setAuthToken(false);
+              },
+              () => {
+                this.props.dispatch(ModalToggle(false));
+                this.clearState();
+              }
+            );
+          } else {
+          }
+        })
+      );
     }
   }
   render() {

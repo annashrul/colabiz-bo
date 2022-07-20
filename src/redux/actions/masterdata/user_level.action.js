@@ -1,6 +1,11 @@
 import { USER_LEVEL } from "../_constants";
 import { ModalToggle } from "../modal.action";
-import { handleDelete, handleGet, handlePost, handlePut } from "../../handle_http";
+import {
+  handleDelete,
+  handleGet,
+  handlePost,
+  handlePut,
+} from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -81,14 +86,20 @@ export const postUserLevel = (data, where) => {
   };
 };
 
-export const putUserLevel = (data, detail) => {
+export const putUserLevel = (data, detail, callback) => {
   return (dispatch) => {
-    handlePut(`user_level/${detail.id}`, data, (res, msg, status) => {
-      dispatch(getUserLevel(detail.where));
-      if (status) {
-        dispatch(ModalToggle(false));
-      }
-    });
+    handlePut(
+      `user_level/${detail.id}`,
+      data,
+      (res, msg, status) => {
+        dispatch(getUserLevel(detail.where));
+        // if (status) {
+        //   dispatch(ModalToggle(false));
+        // }
+        callback(status);
+      },
+      false
+    );
   };
 };
 export const deleteUserLevel = (data) => {
