@@ -89,6 +89,7 @@ class FormBankMember extends Component {
         return;
       }
     }
+    console.log("props", this.props);
     delete state.bank_data;
     this.props.dispatch(
       putBankMember(state, this.props.detail, this.props.dataDetail.bank.id)
