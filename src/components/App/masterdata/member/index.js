@@ -41,6 +41,7 @@ class IndexMember extends Component {
       ],
       status: "",
       kolom_data: [
+        { value: "uid", label: "Username" },
         { value: "fullname", label: "Nama" },
         { value: "mobile_no", label: "No Handphone" },
         { value: "referral", label: "Referral" },
