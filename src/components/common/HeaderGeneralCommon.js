@@ -84,7 +84,7 @@ class HeaderGeneralCommon extends Component {
 
     if (isEmptyOrUndefined(getColumn)) {
       Object.assign(state, { column: getColumn });
-      where += `&search_by=${getColumn}`;
+      where += `&searchby=${getColumn}`;
     }
 
     if (isEmptyOrUndefined(getAny)) {

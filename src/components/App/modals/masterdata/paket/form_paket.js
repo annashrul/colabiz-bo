@@ -51,10 +51,12 @@ class FormPaket extends Component {
   }
   getProps(props) {
     let state = {};
+    console.log("props", props);
     if (props.dataAlokasi !== undefined) {
       if (props.dataAlokasi.length > 0) {
         let data = [];
         props.dataAlokasi.forEach((v, i) => {
+          console.log(props.detail, v.id);
           data.push({ value: v.id, label: v.type });
         });
         Object.assign(state, { alokasi_data: data });

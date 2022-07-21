@@ -21,6 +21,7 @@ import {
   getOrderExcelAction,
   getResiAction,
   getStokisAction,
+  setLoadingMaster,
 } from "../../../../redux/actions/masterdata/order.action";
 import HeaderGeneralCommon from "../../../common/HeaderGeneralCommon";
 import SelectCommon from "../../../common/SelectCommon";
@@ -28,6 +29,7 @@ import TableCommon from "../../../common/TableCommon";
 import Form_resi from "../../modals/masterdata/order/form_resi";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import Preloader from "../../../../Preloader";
+import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 
 class IndexOrder extends Component {
   constructor(props) {
@@ -53,7 +55,9 @@ class IndexOrder extends Component {
       status: "",
       kolom_data: [
         { value: "kd_trx", label: "Kode Transaksi" },
-        { value: "pembeli", label: "pembeli" },
+        { value: "pembeli", label: "Nama pembeli" },
+        { value: "pembeli_username", label: "Username pembeli" },
+        { value: "pembeli_mobile_no", label: "Telepon pembeli" },
       ],
       kolom: "",
       stokis_data: [],
@@ -157,6 +161,8 @@ class IndexOrder extends Component {
       } else {
         where += "&perpage=10";
       }
+      this.props.dispatch(setLoadingMaster(true));
+      this.setState({ data: [] });
       this.props.dispatch(getOrderMasterAction(where));
     }
   }
@@ -246,6 +252,8 @@ class IndexOrder extends Component {
     let val = e.target.checked;
     let data = this.state.data;
     if (col === "checkAll") {
+      this.props.dispatch(setLoadingMaster(true));
+
       this.setState({ data: [], checkedAll: val });
       setTimeout(() => {
         let perpage = 10;
@@ -279,7 +287,7 @@ class IndexOrder extends Component {
       };
       this.setState({ detail: detail });
       this.setState(data);
-      setTimeout(() => this.handleIsDisabledButton(!val), 100);
+      // setTimeout(() => this.handleIsDisabledButton(!val), 100);
       console.log("else");
     }
   }
@@ -306,6 +314,7 @@ class IndexOrder extends Component {
     this.setState({ isDisableButtonResi: isFalse });
   }
   handlePageChange(pageNumber) {
+    this.props.dispatch(setLoadingMaster(true));
     this.setState({ data: [] });
     setTimeout(() => {
       this.handleGet(this.state.where_data, pageNumber);
@@ -340,6 +349,7 @@ class IndexOrder extends Component {
       kdTrx,
       kdTrx_data,
     } = this.state;
+    console.log("loadingMaster", this.props.loadingMaster);
     // console.log(kdTrx_data);
     // console.log("where", data);
     return (
@@ -371,6 +381,7 @@ class IndexOrder extends Component {
                     label={"Stokis"}
                     options={stokis_data}
                     callback={(res) => {
+                      this.props.dispatch(setLoadingMaster(true));
                       this.setState({
                         stokis: res.value,
                         data: [],
@@ -393,6 +404,7 @@ class IndexOrder extends Component {
                     label={"Resi"}
                     options={resi_data}
                     callback={(res) => {
+                      this.props.dispatch(setLoadingMaster(true));
                       this.setState({
                         resi: res.value,
                         data: [],
@@ -444,148 +456,157 @@ class IndexOrder extends Component {
             </div>
           </div>
         </div>
-        {data !== undefined && data.length > 0
-          ? data.map((res, key) => {
-              let totalQty = 0;
-              let subTotal = 0;
+        {this.props.loadingMaster ? (
+          <Preloader />
+        ) : data !== undefined && data.length > 0 ? (
+          data.map((res, key) => {
+            let totalQty = 0;
+            let subTotal = 0;
 
-              return (
-                <div className="card mb-2" key={key}>
-                  <div className="card-header">
-                    <div className="row">
-                      <div className="col-md-11">
-                        <div className="form-group">
-                          <input
-                            type="checkbox"
-                            id="exampleCheck1"
-                            checked={res.checked}
-                            value={res.checked}
-                            onChange={(e) => this.handleCheck(e, key)}
-                          />
-                          <label
-                            className="text-black"
-                            style={{
-                              marginLeft: "5px",
-                            }}
-                          >
-                            {res.kd_trx}
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-md-1">
-                        <p className="text-right">{key + 1}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-md-3">
-                        <p>
-                          <small>Pemesan</small> <br /> {res.pembeli}
-                        </p>
-
-                        <p>
-                          <small>Tanggal Pemesanan</small> <br />{" "}
-                          {dateIndo(res.created_at)}
-                        </p>
-                        <p>
-                          <small>Alamat</small> <br /> {res.main_address},{" "}
-                          {res.kecamatan}, {res.kota}, {res.provinsi}
-                        </p>
-                        <p>
-                          <small>Telepon</small> <br /> {res.pembeli_mobile_no}
-                        </p>
-                      </div>
-                      <div className="col-md-3">
-                        <p>
-                          <small>Stokis</small> <br /> {res.stockis} -
-                          {res.stockis_mobile_no}
-                        </p>
-                        <p>
-                          <small>Penerima</small> <br /> {res.penerima}
-                        </p>
-                        <p>
-                          <small>Status Transaksi</small> <br />{" "}
-                          {statusOrder(res.status)}
-                        </p>
-                        <p>
-                          <small>Status Pengambilan</small> <br />{" "}
-                          {statusPengambilan(res.status_pengambilan)}
-                        </p>{" "}
-                        <small>Tagihan - {res.metode_pembayaran}</small>
-                        <h1
+            return (
+              <div className="card mb-2" key={key}>
+                <div className="card-header">
+                  <div className="row">
+                    <div className="col-md-11">
+                      <div className="form-group">
+                        <input
+                          type="checkbox"
+                          id="exampleCheck1"
+                          checked={res.checked}
+                          value={res.checked}
+                          onChange={(e) => this.handleCheck(e, key)}
+                        />
+                        <label
+                          className="text-black"
                           style={{
-                            borderRadius: "10px",
-                            border: "1px dashed green",
-                            padding: "5px",
-                            textAlign: "center",
-                            color: "green",
+                            marginLeft: "5px",
                           }}
                         >
-                          {toRp(res.grand_total)}
-                        </h1>
+                          {res.kd_trx}
+                        </label>
                       </div>
-
-                      <div className="col-md-6" style={{ overflowX: "auto" }}>
-                        <small>Daftar Paket</small>
-                        <table className="table table-hover">
-                          <thead>
-                            <tr>
-                              <th width="1%">No</th>
-                              <th>Nama</th>
-
-                              <th width="1%">Harga</th>
-                              <th width="1%">Qty</th>
-                              <th width="1%">Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {res.detail !== undefined && res.detail.length > 0
-                              ? res.detail.map((val, index) => {
-                                  totalQty += parseInt(val.qty, 10);
-                                  subTotal += parseInt(val.total, 10);
-                                  return (
-                                    <tr key={index}>
-                                      <td className="middle nowrap text-center">
-                                        {index + 1}
-                                      </td>
-                                      <td className="middle nowrap">
-                                        {val.paket}
-                                      </td>
-
-                                      <td className="middle nowrap text-right">
-                                        {toRp(val.harga)}
-                                      </td>
-                                      <td className="middle nowrap text-right">
-                                        {toRp(val.qty)}
-                                      </td>
-                                      <td className="middle nowrap text-right">
-                                        {toRp(val.total)}
-                                      </td>
-                                    </tr>
-                                  );
-                                })
-                              : noData(5)}
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <th colSpan="3">Total</th>
-                              <th colSpan="1" className="text-right">
-                                {toRp(totalQty)}
-                              </th>
-                              <th colSpan="1" className="text-right">
-                                {toRp(subTotal)}
-                              </th>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
+                    </div>
+                    <div className="col-md-1">
+                      <p className="text-right">
+                        {generateNo(
+                          key,
+                          parseInt(paginationMaster.current_page, 10)
+                        )}
+                      </p>
                     </div>
                   </div>
                 </div>
-              );
-            })
-          : ""}
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-3">
+                      <p>
+                        <small>Pemesan</small> <br /> {res.pembeli}
+                      </p>
+
+                      <p>
+                        <small>Tanggal Pemesanan</small> <br />{" "}
+                        {dateIndo(res.created_at)}
+                      </p>
+                      <p>
+                        <small>Alamat</small> <br /> {res.main_address},{" "}
+                        {res.kecamatan}, {res.kota}, {res.provinsi}
+                      </p>
+                      <p>
+                        <small>Telepon</small> <br /> {res.pembeli_mobile_no}
+                      </p>
+                    </div>
+                    <div className="col-md-3">
+                      <p>
+                        <small>Stokis</small> <br /> {res.stockis} -
+                        {res.stockis_mobile_no}
+                      </p>
+                      <p>
+                        <small>Penerima</small> <br /> {res.penerima}
+                      </p>
+                      <p>
+                        <small>Status Transaksi</small> <br />{" "}
+                        {statusOrder(res.status)}
+                      </p>
+                      <p>
+                        <small>Status Pengambilan</small> <br />{" "}
+                        {statusPengambilan(res.status_pengambilan)}
+                      </p>{" "}
+                      <small>Tagihan - {res.metode_pembayaran}</small>
+                      <h1
+                        style={{
+                          borderRadius: "10px",
+                          border: "1px dashed green",
+                          padding: "5px",
+                          textAlign: "center",
+                          color: "green",
+                        }}
+                      >
+                        {toRp(res.grand_total)}
+                      </h1>
+                    </div>
+
+                    <div className="col-md-6" style={{ overflowX: "auto" }}>
+                      <small>Daftar Paket</small>
+                      <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th width="1%">No</th>
+                            <th>Nama</th>
+
+                            <th width="1%">Harga</th>
+                            <th width="1%">Qty</th>
+                            <th width="1%">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {res.detail !== undefined && res.detail.length > 0
+                            ? res.detail.map((val, index) => {
+                                totalQty += parseInt(val.qty, 10);
+                                subTotal += parseInt(val.total, 10);
+                                return (
+                                  <tr key={index}>
+                                    <td className="middle nowrap text-center">
+                                      {index + 1}
+                                    </td>
+                                    <td className="middle nowrap">
+                                      {val.paket}
+                                    </td>
+
+                                    <td className="middle nowrap text-right">
+                                      {toRp(val.harga)}
+                                    </td>
+                                    <td className="middle nowrap text-right">
+                                      {toRp(val.qty)}
+                                    </td>
+                                    <td className="middle nowrap text-right">
+                                      {toRp(val.total)}
+                                    </td>
+                                  </tr>
+                                );
+                              })
+                            : noData(5)}
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th colSpan="3">Total</th>
+                            <th colSpan="1" className="text-right">
+                              {toRp(totalQty)}
+                            </th>
+                            <th colSpan="1" className="text-right">
+                              {toRp(subTotal)}
+                            </th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <img src={NOTIF_ALERT.NO_DATA} alt="member" />
+        )}
         <div style={{ marginTop: "20px", float: "right" }}>
           <Paginationq
             current_page={
