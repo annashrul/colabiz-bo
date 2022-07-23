@@ -40,7 +40,11 @@ export const getExcelDeposit = (where = "") => {
 };
 
 export const postDeposit = (data, id) => async (dispatch) => {
-  handlePut(`transaction/deposit/${id}/approve`, data, (res, msg, status) => {
-    dispatch(getDeposit("page=1"));
-  });
+  handlePut(
+    `transaction/depositadmin/${id}/approve`,
+    data,
+    (res, msg, status) => {
+      dispatch(getDeposit("page=1"));
+    }
+  );
 };
