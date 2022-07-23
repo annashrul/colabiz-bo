@@ -41,7 +41,8 @@ export const getExcelDeposit = (where = "") => {
 
 export const postDeposit = (data, id) => async (dispatch) => {
   handlePut(
-    `transaction/depositadmin/${id}/approve`,
+    // `transaction/depositadmin/${id}/approve`,
+    `transaction/topup/${id}/approve`,
     data,
     (res, msg, status) => {
       dispatch(getDeposit("page=1"));
