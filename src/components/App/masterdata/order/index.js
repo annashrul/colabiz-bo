@@ -253,7 +253,6 @@ class IndexOrder extends Component {
     let data = this.state.data;
     if (col === "checkAll") {
       this.props.dispatch(setLoadingMaster(true));
-
       this.setState({ data: [], checkedAll: val });
       setTimeout(() => {
         let perpage = 10;
@@ -287,7 +286,7 @@ class IndexOrder extends Component {
       };
       this.setState({ detail: detail });
       this.setState(data);
-      // setTimeout(() => this.handleIsDisabledButton(!val), 100);
+      setTimeout(() => this.handleIsDisabledButton(!val), 100);
       console.log("else");
     }
   }
@@ -467,7 +466,7 @@ class IndexOrder extends Component {
               <div className="card mb-2" key={key}>
                 <div className="card-header">
                   <div className="row">
-                    <div className="col-md-11">
+                    <div className="col-9 col-xs-9 col-md-11">
                       <div className="form-group">
                         <input
                           type="checkbox"
@@ -486,8 +485,14 @@ class IndexOrder extends Component {
                         </label>
                       </div>
                     </div>
-                    <div className="col-md-1">
-                      <p className="text-right">
+                    <div className="col-3 col-xs-3 col-md-1">
+                      <p
+                        className="text-center"
+                        style={{
+                          color: "green",
+                          border: "2px dashed green",
+                        }}
+                      >
                         {generateNo(
                           key,
                           parseInt(paginationMaster.current_page, 10)
@@ -535,7 +540,7 @@ class IndexOrder extends Component {
                       <h1
                         style={{
                           borderRadius: "10px",
-                          border: "1px dashed green",
+                          border: "2px dashed green",
                           padding: "5px",
                           textAlign: "center",
                           color: "green",
